@@ -93,6 +93,8 @@
     cursor:pointer;
     box-shadow:var(--shadow);
     transition:transform .12s ease, color .12s ease, background .12s ease;
+    touch-action:manipulation;
+    min-height:44px;
   }
   .tab-btn:hover{transform:translateY(-2px);}
   .tab-btn.active{background:var(--paper); color:var(--barn); font-weight:600;}
@@ -125,8 +127,10 @@
     font-family:'Inter',sans-serif; font-size:.92rem;
     padding:9px 10px; border:1px solid var(--line); border-radius:7px;
     background:#fff; color:var(--ink);
+    min-height:44px;
+    width:100%;
   }
-  .field textarea{resize:vertical; min-height:38px;}
+  .field textarea{resize:vertical; min-height:44px;}
   .field input:focus, .field select:focus, .field textarea:focus{
     outline:2px solid var(--wheat-dark); outline-offset:1px;
   }
@@ -136,6 +140,9 @@
     font-family:'Inter',sans-serif; font-weight:600; font-size:.86rem;
     border-radius:7px; padding:10px 18px; cursor:pointer; border:1px solid transparent;
     transition:filter .12s ease, transform .12s ease;
+    touch-action:manipulation;
+    min-height:44px;
+    min-width:44px;
   }
   button.primary{background:var(--barn); color:#fff;}
   button.primary:hover{filter:brightness(1.12);}
@@ -146,10 +153,22 @@
   button:active{transform:scale(.98);}
   button:focus-visible{outline:2px solid var(--wheat-dark); outline-offset:2px;}
 
-  table{width:100%; border-collapse:collapse; margin-top:6px; font-size:.86rem;}
+  .table-wrap{
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    margin:6px 0 2px;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:6px;
+    font-size:.86rem;
+    min-width:500px;
+  }
   thead th{
     font-family:'IBM Plex Mono',monospace; font-size:.68rem; letter-spacing:.05em; text-transform:uppercase;
     text-align:left; color:var(--ink-soft); border-bottom:2px solid var(--line); padding:8px 8px;
+    white-space:nowrap;
   }
   tbody td{padding:9px 8px; border-bottom:1px solid var(--line); font-variant-numeric:tabular-nums;}
   tbody tr:hover{background:rgba(216,193,133,.16);}
@@ -190,7 +209,7 @@
     font-family:'IBM Plex Mono',monospace; font-size:.76rem; line-height:1.55;
     padding:16px; border-radius:8px; margin:10px 0 4px;
   }
-  details summary{cursor:pointer; font-weight:600; color:var(--barn-dark); font-size:.9rem; margin:4px 0;}
+  details summary{cursor:pointer; font-weight:600; color:var(--barn-dark); font-size:.9rem; margin:4px 0; touch-action:manipulation;}
   ol.steps{font-size:.86rem; color:var(--ink-soft); line-height:1.7; padding-left:20px;}
   .status-line{font-size:.82rem; margin-top:10px; font-family:'IBM Plex Mono',monospace;}
   .status-line.ok{color:var(--ok);}
@@ -205,6 +224,7 @@
     cursor:pointer; box-shadow:0 4px 14px rgba(42,38,32,.28);
     display:flex; align-items:center; justify-content:center;
     transition:transform .15s ease, filter .15s ease, opacity .15s ease;
+    touch-action:manipulation;
   }
   #btnInstalar:hover{transform:translateY(-2px) scale(1.05); filter:brightness(1.05);}
   #btnInstalar:focus-visible{outline:2px solid var(--rust); outline-offset:3px;}
@@ -217,6 +237,7 @@
     font-size:1.5rem; cursor:pointer; box-shadow:0 4px 14px rgba(42,38,32,.28);
     display:flex; align-items:center; justify-content:center;
     transition:transform .15s ease, filter .15s ease;
+    touch-action:manipulation;
   }
   #btnCalc:hover{transform:translateY(-2px) scale(1.04); filter:brightness(1.1);}
   #btnCalc:focus-visible{outline:2px solid var(--rust); outline-offset:3px;}
@@ -240,7 +261,7 @@
   }
   .calc-head button{
     background:none; border:none; color:var(--cream); font-size:.95rem; cursor:pointer; line-height:1;
-    padding:2px 4px;
+    padding:2px 4px; touch-action:manipulation;
   }
   .calc-head button:hover{color:var(--wheat);}
   .calc-display{
@@ -252,6 +273,8 @@
   .calc-key{
     background:#fff; border:none; padding:16px 0; font-size:1.05rem; font-weight:600;
     color:var(--ink); cursor:pointer; font-family:'Inter',sans-serif;
+    touch-action:manipulation;
+    min-height:48px;
   }
   .calc-key:hover{background:var(--cream);}
   .calc-key.op{background:var(--wheat); color:var(--barn-dark);}
@@ -259,15 +282,41 @@
   .calc-key.eq{background:var(--rust); color:#fff;}
   .calc-key.eq:hover{filter:brightness(1.1);}
 
-  @media (max-width:560px){
-    header.top{padding:22px 16px 18px;}
-    nav.tabs{padding:0 10px;}
-    main{padding:0 12px;}
-    .card{padding:18px 16px;}
+  @media (max-width:640px){
+    header.top{padding:20px 16px 16px;}
+    h1.brand{font-size:1.6rem;}
+    .brand small{font-size:.75rem;}
+    nav.tabs{padding:0 10px; gap:4px;}
+    .tab-btn{font-size:.7rem; padding:8px 12px 10px; min-height:40px;}
+    main{margin:28px auto 0; padding:0 12px;}
+    .card{padding:16px 14px;}
+    form.grid{grid-template-columns:1fr; gap:10px;}
+    .field input, .field select, .field textarea{font-size:1rem; padding:10px 10px; min-height:48px;}
+    .field label{font-size:.7rem;}
+    button.primary, button.ghost{width:100%; justify-content:center;}
+    .totals-strip{gap:10px;}
+    .stat-block{min-width:120px; padding:12px 14px;}
+    .stat-block .n{font-size:1.4rem;}
+    .dash-grid{grid-template-columns:1fr;}
+    .table-wrap{margin:0 -6px; padding:0 6px;}
+    table{font-size:.78rem; min-width:400px;}
+    thead th, tbody td{padding:6px 6px;}
+    .calc-box{width:100%; max-width:320px; margin:0 auto;}
+    #btnCalc{width:48px; height:48px; bottom:16px; right:16px;}
+    #btnInstalar{width:42px; height:42px; bottom:76px; right:16px;}
+  }
+  @media (max-width:400px){
+    h1.brand{font-size:1.3rem;}
+    .tab-btn{font-size:.65rem; padding:6px 8px 8px;}
+    .card{padding:12px 10px;}
+    table{min-width:320px; font-size:.72rem;}
+    .stat-block .n{font-size:1.2rem;}
+    .calc-key{padding:14px 0; font-size:.95rem; min-height:44px;}
   }
 </style>
 </head>
 <body>
+
 
 <header class="top">
   <div class="top-inner">
